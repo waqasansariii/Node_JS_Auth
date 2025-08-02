@@ -1,4 +1,5 @@
 require('dotenv').config();
+const serverless = require('serverless-http');
 const express = require('express');
 const connecToDB = require("./database/db.js");
 const authRoutes = require("./routes/auth-routes.js");
@@ -17,7 +18,7 @@ app.use('/api/image',uploadImageRoutes);
 connecToDB();
 const PORT = process.env.PORT || 3000;
 
-
-app.listen(PORT,()=>{
-    console.log(`Server is now liestening to port ${PORT}`)
-})
+// app.listen(PORT,()=>{
+//     console.log(`Server is now liestening to port ${PORT}`)
+// })  it is not support on the deployment on vercel
+module.exports = serverless(app);
